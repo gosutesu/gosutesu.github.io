@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sample</title>
+  <link rel="manifest" href="/manifest.json" />
+  <!-- ios(safariがmanifest.jsonに未対応のため）-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Sample">
+  <link rel="apple-touch-icon" href="/images/icons/icon192.png">
+  <!-- サイト説明-->
+  <meta name="description" content="A PWA sample app">
+</head>
+<body>
+  <script>
+    // ServiceWorkerの登録
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          });
+      });
+    }
+  </script>
+  <p id="app">Hello World</p>
+  <button onclick="addExclamation()">push</button>
+  <script>
+    function addExclamation() {
+      let t = document.getElementById('app');
+      t.innerText = t.innerText + '!';
+    }
+  </script>
+</body>
+
+</html>
